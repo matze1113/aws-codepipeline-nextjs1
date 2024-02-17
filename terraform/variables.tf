@@ -19,7 +19,7 @@ variable "github_owner" {
 variable "github_repo" {
   description = "GitHub repository name"
   type        = string
-  default     = "techstarter-nextjs"
+  default     = "aws-codepipeline-nextjs"
 }
 
 variable "github_branch" {
