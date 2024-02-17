@@ -58,19 +58,19 @@ resource "aws_codepipeline" "pipeline" {
       }
     }
   }
-    stage {
+  stage {
     name = "Deploy"
 
     action {
-      name             = "Deploy"
-      category         = "Deploy"
-      owner            = "AWS"
-      provider         = "CodeDeploy"
-      input_artifacts  = ["build_output"]
-      version          = "1"
+      name            = "Deploy"
+      category        = "Deploy"
+      owner           = "AWS"
+      provider        = "CodeDeploy"
+      input_artifacts = ["build_output"]
+      version         = "1"
 
       configuration = {
-        ApplicationName  = aws_codedeploy_app.starter.name
+        ApplicationName     = aws_codedeploy_app.starter.name
         DeploymentGroupName = aws_codedeploy_deployment_group.starter.deployment_group_name
       }
     }
@@ -335,7 +335,7 @@ resource "aws_iam_role_policy" "ec2_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "ec2:*"
+        Action   = "ec2:*"
         Effect   = "Allow"
         Resource = "*"
       },
@@ -410,7 +410,7 @@ resource "aws_security_group" "allow_ssh" {
   }
 
   ingress {
-    from_port   = 80 
+    from_port   = 80
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
@@ -426,14 +426,14 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 resource "aws_launch_configuration" "example" {
-  name_prefix   = var.project_name
-  image_id      = var.instance_ami
-  instance_type = var.instance_type
+  name_prefix          = var.project_name
+  image_id             = var.instance_ami
+  instance_type        = var.instance_type
   iam_instance_profile = aws_iam_instance_profile.s3_access_profile.name
 
-  key_name = var.pem_key
-  security_groups    = [aws_security_group.allow_ssh.id]
-  user_data = file("user_data.sh")
+  key_name        = var.pem_key
+  security_groups = [aws_security_group.allow_ssh.id]
+  user_data       = file("user_data.sh")
 
 }
 

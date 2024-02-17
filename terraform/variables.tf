@@ -37,7 +37,7 @@ variable "instance_ami" {
 variable "instance_type" {
   description = "instance ami"
   type        = string
-  default     = "t2.micro"
+  default     = "t3.small"
 }
 
 variable "availability_zones" {
