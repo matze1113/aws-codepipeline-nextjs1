@@ -5,32 +5,27 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - n 20
+      - n 21.5.0
       - echo "Installing dependencies..."
-      - npm install
+      - cd app && npm install
+      - cd ..
+      #- npm install
 
   build:
     commands:
       - echo "Building the project..."
-      - npm run build
+      - cd app && npm run build
+      - cd ..
+      #- npm run build
 
   post_build:
     commands:
       - echo "Running tests..."
+      #- cd ..
+      - ls -la
+      - cp ./codedeploy/appspec.yml appspec.yml
       #- npm test
-
+    
 artifacts:
   files:
-    - .next/**/*
-    - public/**/*
-    - package.json
-    - package-lock.json
-    - .env
-    - .env.local
-    - .env.development
-    - .env.production
-    - .env.test
-    - codedeploy/appspec.yml
-    - codedeploy/deploy.sh
-    - codedeploy/install_node.sh
-  discard-paths: yes
+    "**/*"
