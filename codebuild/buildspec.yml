@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - n 20
+      - echo "Installing dependencies..."
+      - npm install
+
+  build:
+    commands:
+      - echo "Building the project..."
+      - npm run build
+
+  post_build:
+    commands:
+      - echo "Running tests..."
+      #- npm test
+
+artifacts:
+  files:
+    - .next/**/*
+    - public/**/*
+    - package.json
+    - package-lock.json
+    - .env
+    - .env.local
+    - .env.development
+    - .env.production
+    - .env.test
+    - codedeploy/appspec.yml
+    - codedeploy/deploy.sh
+    - codedeploy/install_node.sh
+  discard-paths: yes
